@@ -8,6 +8,5 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()]
   },
-  site: 'https://huchaoning.github.io',
-  base: '/pages'
+  site: 'https://chaon.ing',
 });
