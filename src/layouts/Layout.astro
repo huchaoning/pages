@@ -1,0 +1,62 @@
+---
+import "../styles/global.css";
+
+const { title = "Chao-Ning Hu" } = Astro.props;
+
+const NAME = "Chao-Ning Hu";
+
+export const slateLinear =
+  "bg-linear-to-br from-slate-900 to-slate-500 bg-clip-text text-transparent";
+export const hoverSlateLinear =
+  "hover:bg-linear-to-br hover:from-slate-900 hover:to-slate-500 hover:bg-clip-text hover:text-transparent";
+export const glassEffect =
+  "bg-black/5 backdrop-blur-xl border border-white/50 shadow-2xl";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+  </head>
+
+  <body class="bg-[#fbfbfd] text-slate-900 font-sans antialiased">
+    <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+      <div
+        class="absolute top-0 right-0 w-[60%] h-[60%] bg-[#f5b3bc23] rounded-full blur-[120px]"
+      >
+      </div>
+      <div
+        class="absolute bottom-0 left-0 w-[50%] h-[50%] bg-[#845ec223] rounded-full blur-[100px]"
+      >
+      </div>
+    </div>
+
+    <nav class="fixed top-6 inset-x-0 z-50 flex justify-center px-6">
+      <div
+        class={`flex items-center justify-between w-full max-w-2xl px-6 py-3 rounded-full ${glassEffect}`}
+      >
+        <a href="/" class={`font-bold text-sm hover:opacity-70 ${slateLinear}`}>
+          {NAME}
+        </a>
+
+        <div
+          class="flex gap-6 text-[10px] font-black uppercase tracking-widest text-slate-400"
+        >
+          <a href="/about" class={`${hoverSlateLinear}`}>About</a>
+          <a href="/blog" class={`${hoverSlateLinear}`}>Blog</a>
+        </div>
+      </div>
+    </nav>
+
+    <slot />
+
+    <style>
+      @reference "../styles/global.css";
+
+      nav div {
+        -webkit-backdrop-filter: blur(40px) saturate(180%);
+      }
+    </style>
+  </body>
+</html>
