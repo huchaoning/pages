@@ -1,5 +1,5 @@
 ---
-import Layout, { glassEffect, slateLinear } from "../layouts/Layout.astro";
+import MainLayout, { glassEffect, slateLinear } from "../layouts/MainLayout.astro";
 
 const interests = [
   {
@@ -31,7 +31,7 @@ const interests = [
 const cardBase = `${glassEffect} group p-8 rounded-[32px] transition-all duration-500 hover:shadow-2xl hover:-translate-y-2`;
 ---
 
-<Layout title="Chao-Ning Hu | Home">
+<MainLayout title="Chao-Ning Hu | Home">
   <main class="max-w-5xl mx-auto px-8 pt-48 pb-32">
     <header class="mb-24">
       <p
@@ -72,4 +72,4 @@ const cardBase = `${glassEffect} group p-8 rounded-[32px] transition-all duratio
       }
     </div>
   </main>
-</Layout>
+</MainLayout>
