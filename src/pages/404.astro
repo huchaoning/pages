@@ -1,11 +1,11 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import { slateLinear, glassEffect } from "../layouts/Layout.astro";
+import MainLayout from "../layouts/MainLayout.astro";
+import { slateLinear, glassEffect } from "../layouts/MainLayout.astro";
 
 const title = "404 - Page Not Found";
 ---
 
-<Layout title={title}>
+<MainLayout title={title}>
     <main class="min-h-screen flex flex-col items-center justify-center px-8">
         <h1
             class={`text-[12rem] md:text-[18rem] font-black tracking-tighter leading-none opacity-20 select-none ${slateLinear}`}
@@ -37,4 +37,4 @@ const title = "404 - Page Not Found";
             </div>
         </div>
     </main>
-</Layout>
+</MainLayout>
