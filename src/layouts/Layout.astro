@@ -10,7 +10,7 @@ export const slateLinear =
 export const hoverSlateLinear =
   "hover:bg-linear-to-br hover:from-slate-900 hover:to-slate-500 hover:bg-clip-text hover:text-transparent";
 export const glassEffect =
-  "bg-black/5 backdrop-blur-xl border border-white/50 shadow-2xl";
+  "bg-black/5 backdrop-blur-sm border border-white/50 shadow-2xl";
 ---
 
 <html lang="en">
@@ -51,12 +51,12 @@ export const glassEffect =
 
     <slot />
 
-    <style>
+    <!-- <style>
       @reference "../styles/global.css";
 
       nav div {
         -webkit-backdrop-filter: blur(40px) saturate(180%);
       }
-    </style>
+    </style> -->
   </body>
 </html>
