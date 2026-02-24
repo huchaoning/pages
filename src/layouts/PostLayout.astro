@@ -29,7 +29,8 @@ const { frontmatter } = Astro.props;
       prose-headings:font-bold prose-headings:tracking-tight
       prose-blockquote:border-l-slate-200 prose-blockquote:italic prose-blockquote:text-slate-600
       prose-strong:text-slate-900
-      prose-li:marker:text-slate-300"
+      prose-li:marker:text-slate-300
+      antialiased text-justify"
         >
             <slot />
         </div>
@@ -41,3 +42,17 @@ const { frontmatter } = Astro.props;
         </footer>
     </article>
 </MainLayout>
+
+<style is:global>
+    .prose :where(.MathJax[display="true"]) {
+        display: block;
+        overflow: auto hidden;
+    }
+
+    .MathJax svg {
+        shape-rendering: geometricPrecision;
+        max-width: none;
+        display: inline-block;
+        vertical-align: middle;
+    }
+</style>
