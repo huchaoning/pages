@@ -72,6 +72,21 @@ export const glassEffect =
       "scroll",
       () => {
         const currentScrollY = window.scrollY;
+
+        if (currentScrollY <= 0) {
+          nav.classList.remove("nav-hidden");
+          lastScrollY = 0;
+          scrollUpAmount = 0;
+          return;
+        }
+
+        const maxScroll =
+          document.documentElement.scrollHeight - window.innerHeight;
+        if (currentScrollY >= maxScroll) {
+          lastScrollY = currentScrollY;
+          return;
+        }
+
         const diff = lastScrollY - currentScrollY;
 
         if (currentScrollY > lastScrollY) {
