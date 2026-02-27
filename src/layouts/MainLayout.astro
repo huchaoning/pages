@@ -57,24 +57,33 @@ export const glassEffect =
 
   <style is:global>
     .nav-hidden {
-      transform: translateY(-150%) scale(0.95);
+      transform: translateY(-150%) scale(0.9);
       pointer-events: none;
     }
   </style>
 
   <script is:inline>
     let lastScrollY = window.scrollY;
+    let scrollUpAmount = 0;
     const nav = document.getElementById("main-nav");
+    const threshold = 60;
 
     window.addEventListener(
       "scroll",
       () => {
         const currentScrollY = window.scrollY;
+        const diff = lastScrollY - currentScrollY;
 
-        if (currentScrollY > lastScrollY && currentScrollY > 50) {
-          nav.classList.add("nav-hidden");
+        if (currentScrollY > lastScrollY) {
+          scrollUpAmount = 0;
+          if (currentScrollY > 100) {
+            nav.classList.add("nav-hidden");
+          }
         } else {
-          nav.classList.remove("nav-hidden");
+          scrollUpAmount += diff;
+          if (scrollUpAmount > threshold || currentScrollY < 10) {
+            nav.classList.remove("nav-hidden");
+          }
         }
 
         lastScrollY = currentScrollY;
