@@ -1,8 +1,8 @@
 ---
 import "../styles/global.css";
+import { Icon } from "astro-icon/components";
 
 const { title = "Chao-Ning Hu" } = Astro.props;
-
 const NAME = "Chao-Ning Hu";
 
 export const slateLinear =
@@ -10,7 +10,7 @@ export const slateLinear =
 export const hoverSlateLinear =
   "inline-block hover:bg-linear-to-br hover:from-slate-900 hover:to-slate-500 hover:bg-clip-text hover:text-transparent";
 export const glassEffect =
-  "bg-black/5 backdrop-blur-sm border border-white/50 shadow-2xl inset-shadow-xs";
+  "bg-black/5 backdrop-blur-sm border border-white/50 shadow-xl inset-shadow-xl";
 ---
 
 <html lang="en">
@@ -50,6 +50,13 @@ export const glassEffect =
           <a href="/posts" class={`${hoverSlateLinear}`}>posts</a>
         </div>
       </div>
+      <button
+        id="search-button"
+        class={`flex items-center justify-between px-3 py-3 ml-3 rounded-full ${glassEffect}`}
+        aria-label="Search"
+      >
+        <Icon name="ri:search-line" class="w-4.5 h-4.5 text-slate-400" />
+      </button>
     </nav>
 
     <slot />

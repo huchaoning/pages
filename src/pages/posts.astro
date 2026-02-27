@@ -5,6 +5,7 @@ import MainLayout, {
   glassEffect,
 } from "../layouts/MainLayout.astro";
 import { titleStyle, decorationLine } from "../layouts/PostLayout.astro";
+import ArrowRight from "../components/icons/ArrowRight.astro";
 import { getCollection } from "astro:content";
 
 const allPosts = await getCollection("posts");
@@ -63,9 +64,7 @@ const years = Object.keys(groupedPosts).sort((a, b) => b - a);
                           day: "numeric",
                         })}
                       </time>
-                      <span class={`text-slate-300 group-hover:translate-x-1 transition-transform ${slateLinear}`}>
-                        →
-                      </span>
+                      <ArrowRight class="w-4.5 h-4.5 text-slate-600 transition-all duration-300 group-hover:translate-x-1" />
                     </div>
                   </article>
                 </a>
