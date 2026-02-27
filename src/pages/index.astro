@@ -1,34 +1,27 @@
 ---
 import MainLayout, { glassEffect, slateLinear } from "../layouts/MainLayout.astro";
+import { Icon } from 'astro-icon/components';
 
 const interests = [
   {
-    title: "Human-AI",
-    desc: "Collaborative creativity",
-    icon: "✨",
-    color: "bg-blue-400/10",
+    title: "Quantum Metrology",
+    desc: "Exploring fundamental limits imposed by quantum mechanics.",
+    icon: "lucide:orbit", 
   },
   {
-    title: "Generative UI",
-    desc: "Dynamic interfaces",
-    icon: "🎨",
-    color: "bg-green-400/10",
+    title: "Quantum Imaging",
+    desc: "Optical super-resolution beyond classical limits.",
+    icon: "lucide:microscope", 
   },
   {
-    title: "Knowledge",
-    desc: "Structured data",
-    icon: "🧠",
-    color: "bg-yellow-400/10",
-  },
-  {
-    title: "Computing",
-    desc: "Modern graphics",
-    icon: "🕶️",
-    color: "bg-rose-400/10",
+    title: "Computer Science & AI",
+    desc: "“Not my major, just a hobbyist, driven by personal interest.”",
+    icon: "lucide:cpu", 
   },
 ];
 
-const cardBase = `${glassEffect} group p-8 rounded-[32px] transition-all duration-500 hover:shadow-2xl hover:-translate-y-2`;
+const cardBase = `${glassEffect} group p-8 rounded-4xl transition-all duration-300 hover:-translate-y-2`;
+// from[#E34D2E] via-[#F47B20] to-[#F9CB28]
 ---
 
 <MainLayout title="Chao-Ning Hu | Home">
@@ -42,12 +35,7 @@ const cardBase = `${glassEffect} group p-8 rounded-[32px] transition-all duratio
       <h1
         class="text-6xl md:text-8xl font-black tracking-tighter leading-none mb-6"
       >
-        <span class=`${slateLinear}`>I'm</span>
-        <span
-          class="bg-linear-to-br from[#E34D2E] via-[#F47B20] to-[#F9CB28] bg-clip-text text-transparent"
-        >
-          Chao-Ning Hu
-        </span>
+        <span class=`${slateLinear} leading-tight pb-0`>I'm Chao-Ning Hu</span>
       </h1>
       <p
         class="text-xl md:text-2xl font-medium text-slate-500 max-w-xl leading-snug"
@@ -56,15 +44,15 @@ const cardBase = `${glassEffect} group p-8 rounded-[32px] transition-all duratio
       </p>
     </header>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       {
-        interests.map(({ title, desc, icon, color }) => (
-          <div class={`${cardBase} ${color}`}>
-            <div class="text-3xl mb-6 group-hover:scale-110 transition-transform duration-500">
-              {icon}
+        interests.map(({ title, desc, icon }) => (
+          <div class={`${cardBase}`}>
+            <div class="text-3xl mb-6 group-hover:scale-105 transition-transform duration-500">
+              <Icon name={icon} class="w-8 h-8" />
             </div>
-            <h3 class="text-lg font-bold mb-1 text-slate-800">{title}</h3>
-            <p class="text-xs text-slate-500 font-medium leading-relaxed">
+            <h3 class={`text-xl font-bold mb-2 text-slate-800 ${slateLinear}`}>{title}</h3>
+            <p class="text-sm text-slate-600 leading-relaxed line-clamp-2 mb-4">
               {desc}
             </p>
           </div>

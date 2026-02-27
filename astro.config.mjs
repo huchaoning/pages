@@ -7,6 +7,7 @@ import icon from 'astro-icon';
 
 export default defineConfig({
     markdown: {
+        smartypants: true,
         remarkPlugins: [remarkMath],
         rehypePlugins: [
             [rehypeMathjax, {
@@ -26,4 +27,4 @@ export default defineConfig({
     vite: {
         plugins: [tailwindcss()]
     }
-});
+})

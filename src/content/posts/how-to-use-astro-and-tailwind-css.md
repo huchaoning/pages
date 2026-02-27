@@ -6,7 +6,6 @@ abstract: "Astro is a modern web framework designed for speed, paired with Tailw
 ---
 
 ## Why Astro?
-
 Building a site shouldn't be about sending megabytes of JavaScript to the client. Astro's **Island Architecture** allows me to keep the site fast by default, while only hydrating interactive components when necessary. For a content-driven site like this one, it's the perfect choice.
 
 ### Key Features of this Build:
