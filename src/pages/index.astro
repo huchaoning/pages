@@ -1,27 +1,36 @@
 ---
-import MainLayout, { glassEffect, slateLinear } from "../layouts/MainLayout.astro";
-import { Icon } from 'astro-icon/components';
+// @ts-nocheck
+import MainLayout, {
+  glassEffect,
+  slateLinear,
+} from "../layouts/MainLayout.astro";
+import { Icon } from "astro-icon/components";
 
 const interests = [
   {
     title: "Quantum Metrology",
     desc: "Exploring fundamental limits imposed by quantum mechanics.",
-    icon: "lucide:orbit", 
+    details:
+      "Quantum metrology explores the fundamental precision limits of physical measurements imposed by the quantum mechanics, aiming to develop techniques that surpass classical bounds. My research focuses on Quantum Parameter Estimation, a rigorous theoretical framework designed to quantify the extractable information—specifically the Quantum Fisher Information—within a given quantum state. This field enables the systematic evaluation and optimization of measurement schemes to achieve the highest possible sensitivity in estimating unknown parameters.",
+    icon: "lucide:ruler",
   },
   {
     title: "Quantum Imaging",
     desc: "Optical super-resolution beyond classical limits.",
-    icon: "lucide:microscope", 
+    details:
+      "In a broad context, quantum imaging leverages quantum correlations and nonclassical states of light—such as squeezed or entangled states—to surpass the fundamental limits of classical imaging. My primary research focuses on spatial-mode demultiplexing (SPADE), a technique pioneered by Tsang <i>et al.</i> [<i>Phys. Rev. X</i> 6, 031033 (2016)]. In contrast to direct imaging, which relies on measuring individual photon positions, SPADE decomposes the image-plane optical field into a basis of nontrivial spatial modes, such as Hermite-Gaussian modes. This methodology has been shown to significantly enhance the precision of estimating the separation between two incoherent point sources and to reduce error probabilities in the hypothesis testing of optical-source properties.",
+    icon: "lucide:microscope",
   },
   {
     title: "Computer Science & AI",
     desc: "“Not my major, just a hobbyist, driven by personal interest.”",
-    icon: "lucide:cpu", 
+    details:
+      "While I lack a formal background in computer science, I am an active self-learner with a particular interest in hardware architectures and the fundamental layers of computing. In the context of the current AI landscape, I view my technical skills as a toolset to support my research. I am interested in the field of AI for Science, specifically in bridging the gap between computational methods and classical physics. However, to be clear, my primary passion and core interest remain rooted in fundamental physics.",
+    icon: "lucide:cpu",
   },
 ];
 
-const cardBase = `${glassEffect} group p-8 rounded-4xl transition-all duration-300 hover:-translate-y-2`;
-// from[#E34D2E] via-[#F47B20] to-[#F9CB28]
+const cardBase = `${glassEffect} group p-8 rounded-4xl transition-all duration-300 hover:-translate-y-1`;
 ---
 
 <MainLayout title="Chao-Ning Hu | Home">
@@ -35,7 +44,7 @@ const cardBase = `${glassEffect} group p-8 rounded-4xl transition-all duration-3
       <h1
         class="text-6xl md:text-8xl font-black tracking-tighter leading-none mb-6"
       >
-        <span class=`${slateLinear} leading-tight pb-0`>I'm Chao-Ning Hu</span>
+        <span class=`${slateLinear} leading-tight pb-0`>Chao-Ning Hu</span>
       </h1>
       <p
         class="text-xl md:text-2xl font-medium text-slate-500 max-w-xl leading-snug"
@@ -46,12 +55,16 @@ const cardBase = `${glassEffect} group p-8 rounded-4xl transition-all duration-3
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       {
-        interests.map(({ title, desc, icon }) => (
-          <div class={`${cardBase}`}>
-            <div class="text-3xl mb-6 group-hover:scale-105 transition-transform duration-500">
-              <Icon name={icon} class="w-8 h-8" />
+        interests.map(({ title, desc, details, icon }) => (
+          <div
+            class={`${cardBase} cursor-pointer interest-card`}
+            data-title={title}
+            data-details={details}
+          >
+            <div class="text-3xl mb-6 text-slate-900 group-hover:scale-105 transition-all duration-500">
+              <Icon name={icon} class="w-8 h-8 " />
             </div>
-            <h3 class={`text-xl font-bold mb-2 text-slate-800 ${slateLinear}`}>{title}</h3>
+            <h3 class={`text-xl font-bold mb-2 ${slateLinear}`}>{title}</h3>
             <p class="text-sm text-slate-600 leading-relaxed line-clamp-2 [hyphens:auto]">
               {desc}
             </p>
@@ -60,4 +73,75 @@ const cardBase = `${glassEffect} group p-8 rounded-4xl transition-all duration-3
       }
     </div>
   </main>
+
+  <div
+    id="overlay"
+    class="fixed inset-0 bg-white/5 backdrop-blur-lg z-50 opacity-0 pointer-events-none transition-opacity duration-500 flex items-center justify-center p-6 cursor-zoom-out"
+  >
+    <div
+      id="modal"
+      class=`max-w-2xl w-full ${glassEffect} p-10 rounded-4xl shadow-2xl transform transition-all duration-500 scale-95 opacity-0 cursor-default`
+    >
+      <h3 id="modal-title" class=`text-2xl font-bold mb-4 ${slateLinear}`></h3>
+      <p
+        id="modal-content"
+        class="text-slate-600 leading-relaxed text-sm md:text-base text-justify [hyphens:auto] [text-justify:inter-word]"
+      >
+      </p>
+    </div>
+  </div>
 </MainLayout>
+
+<style>
+  .modal-active {
+    transform: scale(1) !important;
+    opacity: 1 !important;
+  }
+</style>
+
+<script>
+  // @ts-nocheck
+  const cards = document.querySelectorAll(".interest-card");
+  const overlay = document.getElementById("overlay");
+  const modal = document.getElementById("modal");
+  const modalTitle = document.getElementById("modal-title");
+  const modalContent = document.getElementById("modal-content");
+
+  function openModal(title, details) {
+    if (!overlay || !modal || !modalTitle || !modalContent) return;
+
+    modalTitle.innerText = title;
+    modalContent.innerHTML = details;
+
+    overlay.classList.remove("pointer-events-none", "opacity-0");
+    overlay.classList.add("opacity-100");
+
+    setTimeout(() => {
+      modal.classList.add("modal-active");
+    }, 50);
+  }
+
+  function closeModal() {
+    if (!overlay || !modal) return;
+    modal.classList.remove("modal-active");
+    overlay.classList.remove("opacity-100");
+    overlay.classList.add("opacity-0");
+    overlay.classList.add("pointer-events-none");
+  }
+
+  cards.forEach((card) => {
+    card.addEventListener("click", () => {
+      const title = card.getAttribute("data-title");
+      const details = card.getAttribute("data-details");
+      openModal(title, details);
+    });
+  });
+
+  overlay?.addEventListener("click", (e) => {
+    if (e.target === overlay) closeModal();
+  });
+
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeModal();
+  });
+</script>
