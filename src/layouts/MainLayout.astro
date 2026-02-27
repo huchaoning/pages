@@ -32,7 +32,10 @@ export const glassEffect =
       </div>
     </div>
 
-    <nav class="fixed top-6 inset-x-0 z-50 flex justify-center px-6">
+    <nav
+      id="main-nav"
+      class="fixed top-6 inset-x-0 z-50 flex justify-center px-6 transition-all duration-500 ease-in-out"
+    >
       <div
         class={`flex items-center justify-between w-full max-w-2xl px-6 py-3 rounded-full ${glassEffect}`}
       >
@@ -51,4 +54,32 @@ export const glassEffect =
 
     <slot />
   </body>
+
+  <style is:global>
+    .nav-hidden {
+      transform: translateY(-150%) scale(0.95);
+      pointer-events: none;
+    }
+  </style>
+
+  <script is:inline>
+    let lastScrollY = window.scrollY;
+    const nav = document.getElementById("main-nav");
+
+    window.addEventListener(
+      "scroll",
+      () => {
+        const currentScrollY = window.scrollY;
+
+        if (currentScrollY > lastScrollY && currentScrollY > 50) {
+          nav.classList.add("nav-hidden");
+        } else {
+          nav.classList.remove("nav-hidden");
+        }
+
+        lastScrollY = currentScrollY;
+      },
+      { passive: true },
+    );
+  </script>
 </html>
