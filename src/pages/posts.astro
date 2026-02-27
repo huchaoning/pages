@@ -1,0 +1,79 @@
+---
+// @ts-nocheck
+import MainLayout, {
+  slateLinear,
+  glassEffect,
+} from "../layouts/MainLayout.astro";
+import { titleStyle, decorationLine } from "../layouts/PostLayout.astro";
+import { getCollection } from "astro:content";
+
+const allPosts = await getCollection("posts");
+
+const posts = allPosts.sort(
+  (a, b) => b.data.released.valueOf() - a.data.released.valueOf(),
+);
+
+const groupedPosts = posts.reduce((acc, post) => {
+  const year = post.data.released.getFullYear().toString();
+  (acc[year] = acc[year] || []).push(post);
+  return acc;
+}, {});
+
+const years = Object.keys(groupedPosts).sort((a, b) => b - a);
+---
+
+<MainLayout title="Posts">
+  <main class="max-w-2xl mx-auto pt-32 pb-20 px-6">
+    <header class="mb-16">
+      <h1 class={titleStyle}>Posts</h1>
+      <div class={decorationLine}></div>
+    </header>
+
+    <div class="space-y-16">
+      {
+        years.map((year) => (
+          <section>
+            <div class="flex items-center gap-4 mb-8">
+              <h2 class="text-sm font-black uppercase tracking-[0.2em] text-slate-300">
+                {year}
+              </h2>
+              <div class="h-px flex-1 bg-slate-100" />
+            </div>
+
+            <div class="grid gap-6">
+              {groupedPosts[year].map((post) => (
+                <a href={`/posts/${post.id}`} class="group block no-underline">
+                  <article
+                    class={`p-6 rounded-4xl transition-all duration-300 hover:-translate-y-1 ${glassEffect}`}
+                  >
+                    <h3 class={`text-xl font-bold mb-2 ${slateLinear}`}>
+                      {post.data.title}
+                    </h3>
+
+                    {post.data.description && (
+                      <p class="text-sm text-slate-600 leading-relaxed line-clamp-2 mb-4">
+                        {post.data.description}
+                      </p>
+                    )}
+
+                    <div class="flex items-center justify-between">
+                      <time class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                        {post.data.released.toLocaleDateString("en-US", {
+                          month: "short",
+                          day: "numeric",
+                        })}
+                      </time>
+                      <span class={`text-slate-300 group-hover:translate-x-1 transition-transform ${slateLinear}`}>
+                        →
+                      </span>
+                    </div>
+                  </article>
+                </a>
+              ))}
+            </div>
+          </section>
+        ))
+      }
+    </div>
+  </main>
+</MainLayout>

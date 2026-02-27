@@ -6,11 +6,11 @@ const { title = "Chao-Ning Hu" } = Astro.props;
 const NAME = "Chao-Ning Hu";
 
 export const slateLinear =
-  "bg-linear-to-br from-slate-900 to-slate-500 bg-clip-text text-transparent";
+  "inline-block bg-linear-to-br from-slate-900 to-slate-500 bg-clip-text text-transparent";
 export const hoverSlateLinear =
-  "hover:bg-linear-to-br hover:from-slate-900 hover:to-slate-500 hover:bg-clip-text hover:text-transparent";
+  "inline-block hover:bg-linear-to-br hover:from-slate-900 hover:to-slate-500 hover:bg-clip-text hover:text-transparent";
 export const glassEffect =
-  "bg-black/5 backdrop-blur-sm border border-white/50 shadow-2xl";
+  "bg-black/5 backdrop-blur-sm border border-white/50 shadow-2xl inset-shadow-xs";
 ---
 
 <html lang="en">
@@ -46,8 +46,8 @@ export const glassEffect =
         <div
           class="flex gap-6 text-[10px] font-black uppercase tracking-widest text-slate-400"
         >
-          <a href="/about" class={`${hoverSlateLinear}`}>About</a>
-          <a href="/blog" class={`${hoverSlateLinear}`}>Blog</a>
+          <a href="/about" class={`${hoverSlateLinear}`}>about</a>
+          <a href="/posts" class={`${hoverSlateLinear}`}>posts</a>
         </div>
       </div>
     </nav>

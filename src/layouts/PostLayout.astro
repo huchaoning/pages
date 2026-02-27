@@ -1,58 +1,67 @@
 ---
 import MainLayout, { slateLinear } from "./MainLayout.astro";
 const { frontmatter } = Astro.props;
+
+export const titleStyle = `text-4xl md:text-5xl font-extrabold tracking-tight leading-tight pb-0 ${slateLinear}`;
+export const decorationLine =
+  "h-1 w-20 bg-linear-to-r from-slate-900 to-transparent mt-6 rounded-full opacity-20";
+
+const rawDate = frontmatter.released;
+const dateObj = rawDate instanceof Date ? rawDate : new Date(rawDate);
+
+const formattedDate = dateObj.toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+});
 ---
 
 <MainLayout title={frontmatter.title}>
-    <article class="max-w-4xl mx-auto pt-32 pb-20 px-6">
-        <header class="mb-12">
-            {
-                frontmatter.subtitle && (
-                    <p class="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 mb-3">
-                        {frontmatter.subtitle}
-                    </p>
-                )
-            }
-            <h1
-                class={`text-4xl md:text-5xl font-extrabold tracking-tight ${slateLinear}`}
-            >
-                {frontmatter.title}
-            </h1>
-            <div
-                class="h-1 w-20 bg-linear-to-r from-slate-900 to-transparent mt-6 rounded-full opacity-20"
-            >
-            </div>
-        </header>
+  <article class="max-w-4xl mx-auto pt-32 pb-20 px-6 antialiased text-justify">
+    <header class="mb-12">
+      <h1 class={titleStyle}>
+        {frontmatter.title}
+      </h1>
 
-        <div
-            class="prose text-black prose-lg max-w-none
+      <div class={decorationLine}></div>
+
+      {
+        frontmatter.abstract && (
+          <div class="mr-8 ml-8 mt-8 text-slate-500 text-sm md:text-base leading-relaxed italic">
+            {frontmatter.abstract}
+          </div>
+        )
+      }
+    </header>
+
+    <div
+      class="prose text-black prose-lg max-w-none
       prose-headings:font-bold prose-headings:tracking-tight
       prose-blockquote:border-l-slate-200 prose-blockquote:italic prose-blockquote:text-slate-600
       prose-strong:text-slate-900
-      prose-li:marker:text-slate-300
-      antialiased text-justify"
-        >
-            <slot />
-        </div>
+      prose-li:marker:text-slate-300"
+    >
+      <slot />
+    </div>
 
-        <footer
-            class="mt-20 pt-8 border-t border-slate-100 text-sm text-slate-400 font-medium"
-        >
-            Last updated: {new Date().toLocaleDateString()}
-        </footer>
-    </article>
+    <footer
+      class="mt-20 pt-8 border-t border-slate-100 flex items-center text-xs text-slate-400"
+    >
+      <span>Released: {formattedDate}</span>
+    </footer>
+  </article>
 </MainLayout>
 
 <style is:global>
-    .prose :where(.MathJax[display="true"]) {
-        display: block;
-        overflow: auto hidden;
-    }
+  .prose :where(.MathJax[display="true"]) {
+    display: block;
+    overflow: auto hidden;
+  }
 
-    .MathJax svg {
-        shape-rendering: geometricPrecision;
-        max-width: none;
-        display: inline-block;
-        vertical-align: middle;
-    }
+  .MathJax svg {
+    shape-rendering: geometricPrecision;
+    max-width: none;
+    display: inline-block;
+    vertical-align: middle;
+  }
 </style>
