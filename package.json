@@ -11,7 +11,7 @@
   "dependencies": {
     "@iconify-json/ri": "^1.2.10",
     "@tailwindcss/vite": "^4.2.0",
-    "astro": "^5.17.1",
+    "astro": "^5.18.0",
     "astro-icon": "^1.1.5",
     "astro-pagefind": "^1.8.5",
     "rehype-mathjax": "^7.1.0",
