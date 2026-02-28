@@ -3,6 +3,7 @@ import tailwindcss from '@tailwindcss/vite';
 import remarkMath from 'remark-math';
 import rehypeMathjax from 'rehype-mathjax';
 import icon from 'astro-icon';
+import mdx from '@astrojs/mdx';
 
 
 export default defineConfig({
@@ -23,7 +24,7 @@ export default defineConfig({
         ]
     },
 
-    integrations: [icon()],
+    integrations: [icon(), mdx()],
     vite: {
         plugins: [tailwindcss()]
     }

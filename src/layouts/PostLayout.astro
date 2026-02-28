@@ -62,6 +62,13 @@ if (rawDate) {
 </MainLayout>
 
 <style is:global>
+  @reference "../styles/global.css";
+
+  .prose pre,
+  .prose img {
+    @apply rounded-md overflow-hidden mx-auto block;
+  }
+
   .prose :where(.MathJax[display="true"]) {
     display: block;
     overflow: auto hidden;
