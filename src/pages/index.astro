@@ -61,7 +61,7 @@ const cardBase = `${glassEffect} group p-8 rounded-4xl transition-all duration-3
             data-title={title}
             data-details={details}
           >
-            <div class="text-3xl mb-6 text-slate-900 group-hover:scale-105 transition-all duration-500">
+            <div class="text-3xl mb-6 text-slate-800 group-hover:scale-105 transition-all duration-500">
               <Icon name={icon} class="w-8 h-8 " />
             </div>
             <h3 class={`text-xl font-bold mb-2 ${slateLinear}`}>{title}</h3>
@@ -80,12 +80,12 @@ const cardBase = `${glassEffect} group p-8 rounded-4xl transition-all duration-3
   >
     <div
       id="modal"
-      class=`max-w-2xl w-full ${glassEffect} p-10 rounded-4xl shadow-2xl transform transition-all duration-500 scale-95 opacity-0 cursor-default`
+      class=`max-w-2xl w-full ${glassEffect} p-10 rounded-4xl transform transition-all duration-500 cursor-default`
     >
       <h3 id="modal-title" class=`text-2xl font-bold mb-4 ${slateLinear}`></h3>
       <p
         id="modal-content"
-        class="text-slate-600 leading-relaxed text-sm md:text-base text-justify [hyphens:auto] [text-justify:inter-word]"
+        class="text-black leading-relaxed text-sm md:text-base text-justify [hyphens:auto] [text-justify:inter-word]"
       >
       </p>
     </div>
