@@ -6,12 +6,12 @@ const { title = "Chao-Ning Hu" } = Astro.props;
 const NAME = "Chao-Ning Hu";
 
 export const slateLinear =
-  "inline-block bg-linear-to-br from-slate-900 to-slate-500 bg-clip-text text-transparent";
+  "inline-block bg-linear-to-br from-slate-950 to-slate-600 bg-clip-text text-transparent";
 export const glassEffect =
-  "bg-black/5 backdrop-blur-sm border border-white/50 shadow-xl inset-shadow-xl";
+  "bg-white/50 backdrop-blur-sm border border-white/80 shadow-xl inset-shadow-xl inset-shadow-white";
 
 const hoverSlateLinear =
-  "inline-block hover:bg-linear-to-br hover:from-slate-900 hover:to-slate-500 hover:bg-clip-text hover:text-transparent";
+  "inline-block hover:bg-linear-to-br hover:from-slate-950 hover:to-slate-600 hover:bg-clip-text hover:text-transparent";
 ---
 
 <html lang="en">
@@ -21,15 +21,15 @@ const hoverSlateLinear =
     <title>{title}</title>
   </head>
 
-  <body class="bg-[#fbfbfd] text-slate-900 font-sans antialiased">
+  <body class="bg-[#eaeaeb] text-black font-sans antialiased selection:bg-[#01386a] selection:text-white">
     <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-      <div
+      <!-- <div
         class="absolute top-0 right-0 w-[60%] h-[60%] bg-[#f5b3bc23] rounded-full blur-[120px]"
       >
       </div>
       <div
         class="absolute bottom-0 left-0 w-[50%] h-[50%] bg-[#845ec223] rounded-full blur-[100px]"
-      >
+      > -->
       </div>
     </div>
 
@@ -40,12 +40,12 @@ const hoverSlateLinear =
       <div
         class={`flex items-center justify-between w-full max-w-2xl px-6 py-3 rounded-full ${glassEffect}`}
       >
-        <a href="/" class={`font-bold text-sm hover:opacity-70 ${slateLinear}`}>
+        <a href="/" class={`transition-all duration-100 font-bold text-sm hover:opacity-70 ${slateLinear}`}>
           {NAME}
         </a>
 
         <div
-          class="flex gap-6 text-[10px] font-black uppercase tracking-widest text-slate-400"
+          class="flex gap-4 text-[10px] font-black uppercase tracking-widest text-slate-400"
         >
           <a href="/about" class={`${hoverSlateLinear}`}>about</a>
           <a href="/posts" class={`${hoverSlateLinear}`}>posts</a>
@@ -70,7 +70,8 @@ const hoverSlateLinear =
     }
   </style>
 
-  <script is:inline>
+  <script>
+    // @ts-nocheck
     let lastScrollY = window.scrollY;
     let scrollUpAmount = 0;
     const nav = document.getElementById("main-nav");
