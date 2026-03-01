@@ -40,7 +40,7 @@ const years = Object.keys(groupedPosts).sort((a, b) => b - a);
               </h2>
             </div>
 
-            <div class="grid gap-6 text-justify [hyphens:auto] [text-justify:inter-word]">
+            <div class="grid gap-6">
               {groupedPosts[year].map((post) => (
                 <a href={`/posts/${post.id}`} class="group block no-underline">
                   <article
