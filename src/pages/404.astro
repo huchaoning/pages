@@ -1,40 +1,31 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
-import { slateLinear, glassEffect } from "../layouts/MainLayout.astro";
-
 const title = "404 - Page Not Found";
 ---
 
 <MainLayout title={title}>
     <main class="min-h-screen flex flex-col items-center justify-center px-8">
         <h1
-            class={`text-[12rem] md:text-[18rem] font-black tracking-tighter leading-none opacity-20 select-none ${slateLinear}`}
+            class="text-sec text-[12rem] md:text-[18rem] font-black tracking-tighter leading-none opacity-30 select-none"
         >
             404
         </h1>
 
         <div class="text-center -mt-12 md:-mt-20 z-10">
-            <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-4">
+            <h2 class="text-2xl md:text-3xl font-bold text-main mb-4">
                 Lost in the <span class="italic">nebula</span>?
             </h2>
-            <p class="text-slate-500 mb-10 max-w-xs mx-auto">
+            <p class="text-sec mb-10 max-w-xs mx-auto">
                 The page you are looking for has drifted into deep space or
                 never existed.
             </p>
 
             <a
                 href="/"
-                class={`${glassEffect} px-8 py-3 rounded-full text-sm font-bold text-slate-700 hover:scale-105 transition-all duration-300 inline-block`}
+                class="glass px-8 py-3 rounded-full text-sm font-bold text-main hover:scale-105 transition-all duration-300 inline-block"
             >
                 Back to Home
             </a>
-        </div>
-
-        <div class="fixed inset-0 -z-20 overflow-hidden pointer-events-none">
-            <div
-                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-75 h-75 bg-indigo-200/20 rounded-full blur-[80px]"
-            >
-            </div>
         </div>
     </main>
 </MainLayout>

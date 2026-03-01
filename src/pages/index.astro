@@ -29,26 +29,20 @@ const interests = [
     icon: "lucide:cpu",
   },
 ];
-
-const cardBase = `${glassEffect} group p-8 rounded-4xl transition-all duration-300 hover:-translate-y-1`;
 ---
 
 <MainLayout title="Chao-Ning Hu | Home">
   <main class="max-w-5xl mx-auto px-8 pt-48 pb-32">
     <header class="mb-24">
-      <p
-        class="text-[10px] font-bold text-[#1d1d1f] uppercase tracking-[0.4em] mb-4"
-      >
+      <p class="text-[10px] font-bold text-sec uppercase tracking-[0.4em] mb-4">
         Ahoy, this is
       </p>
       <h1
         class="text-6xl md:text-8xl font-black tracking-tighter leading-none mb-6"
       >
-        <span class=`${slateLinear} leading-tight pb-0`>Chao-Ning Hu</span>
+        <span class="text-main leading-tight pb-0">Chao-Ning Hu</span>
       </h1>
-      <p
-        class="text-xl md:text-2xl font-medium text-[#1d1d1f] max-w-xl leading-snug"
-      >
+      <p class="text-xl md:text-2xl font-medium text-sec max-w-xl leading-snug">
         Welcome to my Homepage
       </p>
     </header>
@@ -57,15 +51,15 @@ const cardBase = `${glassEffect} group p-8 rounded-4xl transition-all duration-3
       {
         interests.map(({ title, desc, details, icon }) => (
           <div
-            class={`${cardBase} cursor-pointer interest-card`}
+            class="glass group p-8 rounded-4xl transition-all duration-300 hover:-translate-y-1 cursor-pointer interest-card"
             data-title={title}
             data-details={details}
           >
-            <div class="text-3xl mb-6 text-[#1d1d1f] group-hover:scale-105 transition-all duration-500">
-              <Icon name={icon} class="w-8 h-8 " />
+            <div class="text-3xl mb-6 text-main group-hover:scale-105 transition-all duration-300">
+              <Icon name={icon} class="w-8 h-8" />
             </div>
-            <h3 class={`text-xl font-bold mb-2 ${slateLinear}`}>{title}</h3>
-            <p class="text-sm text-[#1d1d1f] leading-relaxed line-clamp-2 [hyphens:auto]">
+            <h3 class="text-xl font-bold mb-2 text-main">{title}</h3>
+            <p class="text-sm text-sec leading-relaxed line-clamp-2 [hyphens:auto]">
               {desc}
             </p>
           </div>
@@ -80,12 +74,12 @@ const cardBase = `${glassEffect} group p-8 rounded-4xl transition-all duration-3
   >
     <div
       id="modal"
-      class=`max-w-2xl w-full ${glassEffect} p-10 rounded-4xl transform transition-all duration-500 cursor-default`
+      class="max-w-2xl w-full glass p-10 rounded-4xl transform transition-all duration-500 cursor-default"
     >
-      <h3 id="modal-title" class=`text-2xl font-bold mb-4 ${slateLinear}`></h3>
+      <h3 id="modal-title" class="text-2xl font-bold mb-4 text-main"></h3>
       <p
         id="modal-content"
-        class="text-[#1d1d1f] leading-relaxed text-sm md:text-base"
+        class="text-main leading-relaxed text-base md:text-base"
       >
       </p>
     </div>

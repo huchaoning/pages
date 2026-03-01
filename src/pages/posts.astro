@@ -1,9 +1,6 @@
 ---
 // @ts-nocheck
-import MainLayout, {
-  slateLinear,
-  glassEffect,
-} from "../layouts/MainLayout.astro";
+import MainLayout from "../layouts/MainLayout.astro";
 import { titleStyle, decorationLine } from "../layouts/PostLayout.astro";
 import { Icon } from "astro-icon/components";
 import { getCollection } from "astro:content";
@@ -35,7 +32,7 @@ const years = Object.keys(groupedPosts).sort((a, b) => b - a);
         years.map((year) => (
           <section>
             <div class="flex items-center gap-4 mb-8">
-              <h2 class="text-sm font-black uppercase tracking-[0.2em] text-slate-400">
+              <h2 class="text-sm font-black uppercase tracking-[0.2em] text-ter">
                 {year}
               </h2>
             </div>
@@ -43,21 +40,19 @@ const years = Object.keys(groupedPosts).sort((a, b) => b - a);
             <div class="grid gap-6">
               {groupedPosts[year].map((post) => (
                 <a href={`/posts/${post.id}`} class="group block no-underline">
-                  <article
-                    class={`p-6 rounded-4xl transition-all duration-300 hover:-translate-y-1 ${glassEffect}`}
-                  >
-                    <h3 class={`text-xl font-bold mb-2 ${slateLinear}`}>
+                  <article class="p-6 rounded-4xl transition-all duration-300 hover:-translate-y-1 glass">
+                    <h3 class="text-xl font-bold mb-2 text-main">
                       {post.data.title}
                     </h3>
 
                     {post.data.description && (
-                      <p class="text-sm text-slate-600 leading-relaxed line-clamp-2 mb-4">
+                      <p class="text-sm text-sec leading-relaxed line-clamp-2 mb-4">
                         {post.data.description}
                       </p>
                     )}
 
                     <div class="flex items-center justify-between">
-                      <time class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                      <time class="text-[10px] font-bold text-ter uppercase tracking-wides">
                         {post.data.released.toLocaleDateString("en-US", {
                           month: "short",
                           day: "numeric",
@@ -65,7 +60,7 @@ const years = Object.keys(groupedPosts).sort((a, b) => b - a);
                       </time>
                       <Icon
                         name="ri:arrow-right-s-line"
-                        class="w-4.5 h-4.5 text-slate-600 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1"
+                        class="w-4.5 h-4.5 text-main opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1"
                       />
                     </div>
                   </article>

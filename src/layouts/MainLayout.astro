@@ -5,12 +5,10 @@ import { Icon } from "astro-icon/components";
 const { title = "Chao-Ning Hu" } = Astro.props;
 const NAME = "Chao-Ning Hu";
 
-export const slateLinear = "text-[#1d1d1f] antialiased";
-  // "inline-block bg-linear-to-br from-slate-950 to-slate-600 bg-clip-text text-transparent";
-export const glassEffect = "bg-linear-to-br from-[#7f7f7f]/12 to-[7f7f7f]/2 backdrop-blur-xs border border-white/30 shadow-xl inset-shadow-sm inset-shadow-white/30"
-
-const hoverSlateLinear =
-  "inline-block hover:bg-linear-to-br hover:from-slate-950 hover:to-slate-600 hover:bg-clip-text hover:text-transparent";
+// export const slateLinear =
+//   "inline-block bg-linear-to-br from-slate-950 to-slate-600 bg-clip-text text-transparent";
+// const hoverSlateLinear =
+//   "inline-block hover:bg-linear-to-br hover:from-slate-950 hover:to-slate-600 hover:bg-clip-text hover:text-transparent";
 ---
 
 <html lang="en">
@@ -20,98 +18,101 @@ const hoverSlateLinear =
     <title>{title}</title>
   </head>
 
-  <body class=`bg-white text-[#1d1d1f] font-sans antialiased selection:bg-[#01386a] selection:text-white`>
-    <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-      <!-- <div
-        class="absolute top-0 right-0 w-[60%] h-[60%] bg-[#f5b3bc23] rounded-full blur-[120px]"
-      >
-      </div>
-      <div
-        class="absolute bottom-0 left-0 w-[50%] h-[50%] bg-[#845ec223] rounded-full blur-[100px]"
-      > -->
-      </div>
-    </div>
-
-    <nav
-      id="main-nav"
-      class="fixed top-6 inset-x-0 z-50 flex justify-center px-6 transition-all duration-500 ease-in-out"
-    >
-      <div
-        class={`flex items-center justify-between w-full max-w-2xl px-6 py-3 rounded-full border border-[#d2d2d7] ${glassEffect}`}
-      >
-        <a href="/" class={`transition-all duration-100 font-bold text-sm hover:opacity-70 ${slateLinear}`}>
-          {NAME}
-        </a>
-
-        <div
-          class="flex gap-4 text-[10px] font-black uppercase tracking-widest text-slate-400"
-        >
-          <a href="/about" class={`${hoverSlateLinear}`}>about</a>
-          <a href="/posts" class={`${hoverSlateLinear}`}>posts</a>
-        </div>
-      </div>
-      <button
-        id="search-button"
-        class={`flex items-center justify-between px-3 py-3 ml-3 rounded-full border border-[#d2d2d7] ${glassEffect}`}
-        aria-label="Search"
-      >
-        <Icon name="ri:search-line" class="w-4.5 h-4.5 text-slate-400" />
-      </button>
-    </nav>
-
-    <slot />
+  <body
+    class="bg-white text-main font-sans antialiased selection:bg-[#01386a] selection:text-white"
+  >
+    <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none"></div>
   </body>
 
-  <style is:global>
-    .nav-hidden {
-      transform: translateY(-200%) scale(0.9);
-      pointer-events: none;
-    }
-  </style>
+  <nav
+    id="main-nav"
+    class="fixed top-6 inset-x-0 z-50 flex justify-center px-6 transition-all duration-500 ease-in-out"
+  >
+    <div
+      class="flex items-center justify-between w-full max-w-2xl px-6 py-3 rounded-full glass"
+    >
+      <a
+        href="/"
+        class="transition-opacity duration-150 font-bold text-sm hover:opacity-60 text-main"
+      >
+        {NAME}
+      </a>
 
-  <script>
-    // @ts-nocheck
-    let lastScrollY = window.scrollY;
-    let scrollUpAmount = 0;
-    const nav = document.getElementById("main-nav");
-    const threshold = 60;
+      <div
+        class="flex gap-4 text-[10px] font-black uppercase tracking-widest text-sec"
+      >
+        <a href="/about" class="hover:text-main duration-150 transition-color"
+          >about</a
+        >
+        <a href="/posts" class="hover:text-main duration-150 transition-color"
+          >posts</a
+        >
+      </div>
+    </div>
+    <button
+      id="search-button"
+      class="group flex items-center justify-between px-3 py-3 ml-3 rounded-full duration-150 transition-color hover:bg-ter/50 glass"
+      aria-label="Search"
+    >
+      <Icon
+        name="ri:search-line"
+        class="w-4.5 h-4.5 text-sec transition-colors duration-150 group-hover:text-main"
+      />
+    </button>
+  </nav>
 
-    window.addEventListener(
-      "scroll",
-      () => {
-        const currentScrollY = window.scrollY;
-
-        if (currentScrollY <= 0) {
-          nav.classList.remove("nav-hidden");
-          lastScrollY = 0;
-          scrollUpAmount = 0;
-          return;
-        }
-
-        const maxScroll =
-          document.documentElement.scrollHeight - window.innerHeight;
-        if (currentScrollY >= maxScroll) {
-          lastScrollY = currentScrollY;
-          return;
-        }
-
-        const diff = lastScrollY - currentScrollY;
-
-        if (currentScrollY > lastScrollY) {
-          scrollUpAmount = 0;
-          if (currentScrollY > 100) {
-            nav.classList.add("nav-hidden");
-          }
-        } else {
-          scrollUpAmount += diff;
-          if (scrollUpAmount > threshold || currentScrollY < 10) {
-            nav.classList.remove("nav-hidden");
-          }
-        }
-
-        lastScrollY = currentScrollY;
-      },
-      { passive: true },
-    );
-  </script>
+  <slot />
 </html>
+
+<style is:global>
+  .nav-hidden {
+    transform: translateY(-200%) scale(0.9);
+    pointer-events: none;
+  }
+</style>
+
+<script>
+  // @ts-nocheck
+  let lastScrollY = window.scrollY;
+  let scrollUpAmount = 0;
+  const nav = document.getElementById("main-nav");
+  const threshold = 60;
+
+  window.addEventListener(
+    "scroll",
+    () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY <= 0) {
+        nav.classList.remove("nav-hidden");
+        lastScrollY = 0;
+        scrollUpAmount = 0;
+        return;
+      }
+
+      const maxScroll =
+        document.documentElement.scrollHeight - window.innerHeight;
+      if (currentScrollY >= maxScroll) {
+        lastScrollY = currentScrollY;
+        return;
+      }
+
+      const diff = lastScrollY - currentScrollY;
+
+      if (currentScrollY > lastScrollY) {
+        scrollUpAmount = 0;
+        if (currentScrollY > 100) {
+          nav.classList.add("nav-hidden");
+        }
+      } else {
+        scrollUpAmount += diff;
+        if (scrollUpAmount > threshold || currentScrollY < 10) {
+          nav.classList.remove("nav-hidden");
+        }
+      }
+
+      lastScrollY = currentScrollY;
+    },
+    { passive: true },
+  );
+</script>

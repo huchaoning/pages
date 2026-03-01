@@ -1,3 +1,15 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+@theme {
+    --color-main: #1d1d1f;
+    --color-sec: #86868b;
+    --color-ter: #d2d2d7;
+    --color-quat: #e8e8ed;
+}
+
+@layer components {
+    .glass {
+        @apply bg-linear-to-br from-[#7f7f7f]/12 to-[#7f7f7f]/0 backdrop-blur-xs border border-white/30 shadow-xl inset-shadow-sm inset-shadow-white/30;
+    }
+}
