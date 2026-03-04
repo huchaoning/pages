@@ -1,9 +1,6 @@
 ---
 // @ts-nocheck
-import MainLayout, {
-  glassEffect,
-  slateLinear,
-} from "../layouts/MainLayout.astro";
+import MainLayout from "../layouts/MainLayout.astro";
 import { Icon } from "astro-icon/components";
 
 const interests = [
@@ -51,7 +48,7 @@ const interests = [
       {
         interests.map(({ title, desc, details, icon }) => (
           <div
-            class="glass group p-8 rounded-4xl transition-all duration-300 hover:-translate-y-1 cursor-pointer interest-card"
+            class="glass_white group p-8 rounded-4xl transition-all duration-300 hover:-translate-y-1 cursor-pointer interest-card"
             data-title={title}
             data-details={details}
           >
@@ -74,7 +71,7 @@ const interests = [
   >
     <div
       id="modal"
-      class="max-w-2xl w-full glass p-10 rounded-4xl transform transition-all duration-500 cursor-default"
+      class="max-w-2xl w-full glass_white p-10 rounded-4xl transform transition-all duration-500 cursor-default"
     >
       <h3 id="modal-title" class="text-2xl font-bold mb-4 text-main"></h3>
       <p

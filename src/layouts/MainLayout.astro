@@ -2,7 +2,11 @@
 import "../styles/global.css";
 import { Icon } from "astro-icon/components";
 
-const { title = "Chao-Ning Hu" } = Astro.props;
+const {
+  title = "Chao-Ning Hu",
+  bg = "bg-[#F5F5F7]",
+  glass = "glass_white",
+} = Astro.props;
 const NAME = "Chao-Ning Hu";
 
 // export const slateLinear =
@@ -19,7 +23,7 @@ const NAME = "Chao-Ning Hu";
   </head>
 
   <body
-    class="bg-white text-main font-sans antialiased selection:bg-[#01386a] selection:text-white"
+    class={`${bg} text-main font-sans antialiased selection:bg-[#01386a] selection:text-white`}
   >
     <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none"></div>
   </body>
@@ -29,7 +33,7 @@ const NAME = "Chao-Ning Hu";
     class="fixed top-6 inset-x-0 z-50 flex justify-center px-6 transition-all duration-500 ease-in-out"
   >
     <div
-      class="flex items-center justify-between w-full max-w-2xl px-6 py-3 rounded-full glass"
+      class={`flex items-center justify-between w-full max-w-2xl px-6 py-3 rounded-full ${glass}`}
     >
       <a
         href="/"
@@ -51,7 +55,7 @@ const NAME = "Chao-Ning Hu";
     </div>
     <button
       id="search-button"
-      class="group flex items-center justify-between px-3 py-3 ml-3 rounded-full duration-150 transition-color hover:bg-ter/50 glass"
+      class={`group flex items-center justify-between px-3 py-3 ml-3 rounded-full duration-150 transition-color hover:bg-ter/50 ${glass}`}
       aria-label="Search"
     >
       <Icon
