@@ -15,15 +15,15 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
-const pageLang = post.data.lang || "en";
 ---
 
-<PostLayout frontmatter={post.data} lang={`${pageLang}`}>
+<PostLayout frontmatter={post.data}>
   <Content />
 
   <div class="mt-32">
     <div
       id="giscus-fallback"
+      data-pagefind-ignore
       class="text-center border border-quat rounded-4xl border-dashed py-12"
     >
       <p class="text-sm text-sec uppercase text-center">

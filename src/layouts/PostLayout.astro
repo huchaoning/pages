@@ -1,6 +1,6 @@
 ---
 import MainLayout from "./MainLayout.astro";
-const { frontmatter, lang = "en" } = Astro.props;
+const { frontmatter} = Astro.props;
 
 export const titleStyle =
   "text-main text-4xl md:text-5xl font-extrabold tracking-tight leading-tight pb-0";
@@ -23,10 +23,9 @@ if (rawDate) {
 }
 ---
 
-<MainLayout title={frontmatter.title} bg="bg_white" glass="glass_gray" lang={`${lang}`}>
+<MainLayout title={frontmatter.title} bg="bg_white" glass="glass_gray">
   <article
     class="max-w-4xl mx-auto pt-32 pb-20 px-6 font-sans text-base antialiased"
-    lang={`${lang}`}
   >
     <header class="mb-12">
       <h1 class={titleStyle}>{frontmatter.title}</h1>

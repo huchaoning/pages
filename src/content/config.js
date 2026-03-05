@@ -6,7 +6,6 @@ const postSchema = z.object({
   released: z.coerce.date().optional(),
   abstract: z.string().optional(),
   description: z.string().optional(),
-  lang: z.string().optional(),
 });
 
 export const collections = {
