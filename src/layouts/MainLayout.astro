@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import { Icon } from "astro-icon/components";
+import Search from "astro-pagefind/components/Search";
 
 const {
   title = "Chao-Ning Hu",
@@ -26,52 +27,85 @@ const NAME = "Chao-Ning Hu";
     class={`${bg} text-main font-sans antialiased selection:bg-[#01386a] selection:text-white`}
   >
     <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none"></div>
-  </body>
 
-  <nav
-    id="main-nav"
-    class="fixed top-6 inset-x-0 z-50 flex justify-center px-6 transition-all duration-500 ease-in-out"
-  >
-    <div
-      class={`flex items-center justify-between w-full max-w-2xl px-6 py-3 rounded-full ${glass}`}
+    <nav
+      id="main-nav"
+      class="fixed top-6 inset-x-0 z-50 flex justify-center px-6 transition-all duration-500 ease-in-out"
     >
-      <a
-        href="/"
-        class="transition-opacity duration-150 font-bold text-sm hover:opacity-60 text-main"
-      >
-        {NAME}
-      </a>
-
       <div
-        class="flex gap-4 text-[10px] font-black uppercase tracking-widest text-sec"
+        class={`flex items-center justify-between w-full max-w-2xl px-6 py-3 rounded-full ${glass}`}
       >
-        <a href="/about" class="hover:text-main duration-150 transition-color"
-          >about</a
+        <a
+          href="/"
+          class="transition-opacity duration-150 font-bold text-sm hover:opacity-60 text-main"
         >
-        <a href="/posts" class="hover:text-main duration-150 transition-color"
-          >posts</a
+          {NAME}
+        </a>
+
+        <div
+          class="flex gap-4 text-[10px] font-black uppercase tracking-widest text-sec"
         >
+          <a href="/about" class="hover:text-main duration-150 transition-color"
+            >about</a
+          >
+          <a href="/posts" class="hover:text-main duration-150 transition-color"
+            >posts</a
+          >
+        </div>
+      </div>
+      <button
+        id="search-button"
+        class={`group flex items-center justify-between px-3 py-3 ml-3 rounded-full duration-150 transition-color hover:bg-ter/50 ${glass}`}
+        aria-label="Search"
+      >
+        <Icon
+          name="ri:search-line"
+          class="w-4.5 h-4.5 text-sec transition-colors duration-150 group-hover:text-main"
+        />
+      </button>
+    </nav>
+
+    <slot />
+
+    <div
+      id="search-modal"
+      class="fixed inset-0 z-100 hidden bg-sec/30 backdrop-blur-md transition-all duration-300 items-start justify-center pt-24 px-4 cursor-zoom-out opacity-0"
+    >
+      <div
+        class={`glass_white rounded-4xl w-full max-w-2xl overflow-hidden cursor-default transition-all duration-300 scale-95 opacity-0`}
+        id="search-container"
+      >
+        <div class="p-2">
+          <Search
+            id="search"
+            className="pagefind-ui-custom"
+            uiOptions={{ autofocus: true, showImages: false }}
+          />
+        </div>
       </div>
     </div>
-    <button
-      id="search-button"
-      class={`group flex items-center justify-between px-3 py-3 ml-3 rounded-full duration-150 transition-color hover:bg-ter/50 ${glass}`}
-      aria-label="Search"
-    >
-      <Icon
-        name="ri:search-line"
-        class="w-4.5 h-4.5 text-sec transition-colors duration-150 group-hover:text-main"
-      />
-    </button>
-  </nav>
-
-  <slot />
+  </body>
 </html>
 
 <style is:global>
+  @reference "../styles/global.css";
   .nav-hidden {
     transform: translateY(-200%) scale(0.9);
     pointer-events: none;
+  }
+
+  .pagefind-ui-custom {
+    --pagefind-ui-background: transparent;
+    --pagefind-ui-font: inherit;
+  }
+
+  .pagefind-ui-custom .pagefind-ui__search-input {
+    border: 0px;
+    outline: none !important;
+  }
+
+  .pagefind-ui__result-excerpt {
+    @apply text-sec text-sm leading-relaxed mt-1;
   }
 </style>
 
@@ -119,4 +153,53 @@ const NAME = "Chao-Ning Hu";
     },
     { passive: true },
   );
+
+
+  const searchBtn = document.getElementById("search-button");
+  const modal = document.getElementById("search-modal");
+  const container = document.getElementById("search-container");
+
+  function openSearch() {
+    modal?.classList.remove("hidden");
+    modal?.classList.add("flex");
+    requestAnimationFrame(() => {
+      container?.classList.add("scale-100", "opacity-100");
+      container?.classList.remove("scale-95", "opacity-0");
+
+      modal?.classList.add("opacity-100");
+      modal?.classList.remove("opacity-0");
+    });
+    setTimeout(() => {
+      const input = modal?.querySelector('input[type="text"]');
+      (input as HTMLInputElement)?.focus();
+    }, 100);
+  }
+
+  function closeSearch() {
+    container?.classList.add("scale-95", "opacity-0");
+    container?.classList.remove("scale-100", "opacity-100");
+
+    modal?.classList.add("opacity-0");
+    modal?.classList.remove("opacity-100");
+
+    setTimeout(() => {
+      modal?.classList.add("hidden");
+      modal?.classList.remove("flex");
+    }, 300);
+  }
+
+  searchBtn?.addEventListener("click", (e) => {
+    e.preventDefault();
+    openSearch();
+  });
+
+  modal?.addEventListener("click", (e) => {
+    if (e.target === modal) closeSearch();
+  });
+
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !modal?.classList.contains("hidden")) {
+      closeSearch();
+    }
+  });
 </script>

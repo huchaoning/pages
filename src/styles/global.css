@@ -10,10 +10,10 @@
 
 @layer components {
     .glass_gray {
-        @apply bg-linear-to-br from-[#7f7f7f]/12 to-[#7f7f7f]/0 backdrop-blur-xs border border-white/30 shadow-xl inset-shadow-sm inset-shadow-white/30;
+        @apply bg-linear-to-br from-[#7f7f7f]/12 to-[#7f7f7f]/0 backdrop-blur-xs border border-white/30 shadow-xl inset-shadow-sm inset-shadow-white/15;
     }
 
     .glass_white {
-        @apply bg-white/80 backdrop-blur-xs border border-white/30 shadow-xl inset-shadow-black/3;
+        @apply bg-white/75 backdrop-blur-xs border border-white/30 shadow-xl inset-shadow-black/3;
     }
 }

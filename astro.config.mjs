@@ -4,6 +4,7 @@ import remarkMath from 'remark-math';
 import rehypeMathjax from 'rehype-mathjax';
 import icon from 'astro-icon';
 import mdx from '@astrojs/mdx';
+import pagefind from 'astro-pagefind';
 
 
 export default defineConfig({
@@ -24,7 +25,7 @@ export default defineConfig({
         ]
     },
 
-    integrations: [icon(), mdx()],
+    integrations: [icon(), mdx(), pagefind()],
     vite: {
         plugins: [tailwindcss()]
     }

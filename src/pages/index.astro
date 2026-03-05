@@ -56,9 +56,7 @@ const interests = [
               <Icon name={icon} class="w-8 h-8" />
             </div>
             <h3 class="text-xl font-bold mb-2 text-main">{title}</h3>
-            <p class="text-sm text-sec leading-relaxed line-clamp-2 [hyphens:auto]">
-              {desc}
-            </p>
+            <p class="text-sm text-sec leading-relaxed line-clamp-2">{desc}</p>
           </div>
         ))
       }
@@ -67,11 +65,11 @@ const interests = [
 
   <div
     id="overlay"
-    class="fixed inset-0 bg-white/5 backdrop-blur-lg z-50 opacity-0 pointer-events-none transition-opacity duration-500 flex items-center justify-center p-6 cursor-zoom-out"
+    class="fixed inset-0 bg-sec/30 backdrop-blur-md z-50 opacity-0 hidden transition-all duration-300 items-center justify-center p-6 cursor-zoom-out"
   >
     <div
       id="modal"
-      class="max-w-2xl w-full glass_white p-10 rounded-4xl transform transition-all duration-500 cursor-default"
+      class="max-w-2xl w-full glass_white p-10 rounded-4xl transform transition-all duration-300 cursor-default scale-95"
     >
       <h3 id="modal-title" class="text-2xl font-bold mb-4 text-main"></h3>
       <p
@@ -83,12 +81,6 @@ const interests = [
   </div>
 </MainLayout>
 
-<style>
-  .modal-active {
-    transform: scale(1) !important;
-    opacity: 1 !important;
-  }
-</style>
 
 <script>
   // @ts-nocheck
@@ -104,20 +96,31 @@ const interests = [
     modalTitle.innerText = title;
     modalContent.innerHTML = details;
 
-    overlay.classList.remove("pointer-events-none", "opacity-0");
-    overlay.classList.add("opacity-100");
+    overlay.classList.remove("hidden");
+    overlay.classList.add("flex");
 
-    setTimeout(() => {
-      modal.classList.add("modal-active");
-    }, 50);
+    requestAnimationFrame(() => {
+      overlay.classList.add("opacity-100");
+      overlay.classList.remove("opacity-0");
+      
+      modal.classList.add("scale-100", "opacity-100");
+      modal.classList.remove("scale-95", "opacity-0");
+    });
   }
 
   function closeModal() {
     if (!overlay || !modal) return;
-    modal.classList.remove("modal-active");
-    overlay.classList.remove("opacity-100");
+
+    modal.classList.add("scale-95", "opacity-0");
+    modal.classList.remove("scale-100", "opacity-100");
+    
     overlay.classList.add("opacity-0");
-    overlay.classList.add("pointer-events-none");
+    overlay.classList.remove("opacity-100");
+
+    setTimeout(() => {
+      overlay.classList.add("hidden");
+      overlay.classList.remove("flex");
+    }, 300);
   }
 
   cards.forEach((card) => {
