@@ -1,7 +1,7 @@
 ---
 title: How to use Astro and Tailwind CSS
 description: Since it's the first post on my site, let me introduce how I build this site.
-released: 2026-02-27
+date: 2026-02-27
 abstract: "Astro is a modern web framework designed for speed, paired with Tailwind CSS to create a highly customizable and performant developer experience. This post documents the philosophy and tools behind the creation of this digital space."
 ---
 

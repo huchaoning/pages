@@ -7,18 +7,20 @@ import { getCollection } from "astro:content";
 
 const allPosts = await getCollection("posts");
 
+// 1. 核心排序：日期降序，日期相同时标题升序
 const posts = allPosts.sort((a, b) => {
-  const dateA = a.data.released.valueOf();
-  const dateB = b.data.released.valueOf();
+  const dateA = a.data.date.valueOf();
+  const dateB = b.data.date.valueOf();
   if (dateA !== dateB) {
     return dateB - dateA;
   }
-  return a.data.title.localeCompare(b.data.title);
+  return a.data.title.localeCompare(b.data.title, 'zh-Hans-CN');
 });
 
+// 2. 按“年份 月份”分组
 const groupedPosts = posts.reduce((acc, post) => {
-  const monthName = post.data.released.toLocaleString('en', { month: 'long' }).toUpperCase();
-  const year = post.data.released.getFullYear();
+  const monthName = post.data.date.toLocaleString('en', { month: 'long' }).toUpperCase();
+  const year = post.data.date.getFullYear();
   const groupKey = `${year} ${monthName}`;
 
   if (!acc[groupKey]) {
@@ -56,6 +58,7 @@ const groupKeys = Object.keys(groupedPosts).sort((a, b) => {
                   <article class="p-6 rounded-4xl transition-all duration-300 hover:-translate-y-1 glass_white">
                     <h3 class="text-xl font-bold mb-2 text-main">
                       {post.data.title}
+                      {post.data.title_zh && "(in Chinese)"}
                     </h3>
 
                     {post.data.description && (
@@ -66,7 +69,7 @@ const groupKeys = Object.keys(groupedPosts).sort((a, b) => {
 
                     <div class="flex items-center justify-between">
                       <time class="text-[10px] font-bold text-ter uppercase tracking-wides">
-                        {post.data.released.toLocaleDateString("en", {
+                        {post.data.date.toLocaleDateString("en", {
                           month: "short",
                           day: "numeric",
                         })}

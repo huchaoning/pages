@@ -8,7 +8,7 @@ export const titleStyle =
 export const decorationLine =
   "bg-linear-to-r from-main to-transparent mt-6 rounded-full opacity-50 h-1 w-20";
 
-const rawDate = frontmatter.released;
+const rawDate = frontmatter.date;
 let formattedDate = null;
 
 if (rawDate) {
@@ -21,14 +21,15 @@ if (rawDate) {
     });
   }
 }
+const title = frontmatter.title_zh ? frontmatter.title_zh : frontmatter.title
 ---
 
-<MainLayout title={frontmatter.title} bg="bg_white" glass="glass_gray">
+<MainLayout title={title} bg="bg_white" glass="glass_gray">
   <article
     class="max-w-4xl mx-auto pt-32 pb-20 px-6 font-sans text-base antialiased"
   >
     <header class="mb-12">
-      <h1 class={titleStyle}>{frontmatter.title}</h1>
+      <h1 class={titleStyle}>{title}</h1>
       <div class={decorationLine}></div>
       {
         frontmatter.abstract && (
@@ -53,9 +54,9 @@ if (rawDate) {
     {
       formattedDate && (
         <footer
-          class="mt-20 pt-8 border-t border-quat/50 flex items-center text-quat font-blod text-[10px] select-none"
+          class="mt-20 pt-4 border-t border-quat/50 flex items-center text-quat text-[10px] select-none"
         >
-          <span>Released: {formattedDate}</span>
+          <span class="font-black uppercase italic">Date: {formattedDate}</span>
         </footer>
       )
     }
