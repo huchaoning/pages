@@ -69,10 +69,10 @@ const NAME = "Chao-Ning Hu";
 
     <div
       id="search-modal"
-      class="fixed inset-0 z-100 hidden bg-sec/30 backdrop-blur-md transition-all duration-300 items-start justify-center pt-24 px-4 cursor-zoom-out opacity-0"
+      class="fixed inset-0 z-100 hidden bg-sec/30 backdrop-blur-md transition-all duration-150 items-start justify-center pt-24 px-4 opacity-0"
     >
       <div
-        class={`glass_white rounded-4xl w-full max-w-2xl overflow-hidden cursor-default transition-all duration-300 scale-95 opacity-0`}
+        class={`glass_white rounded-4xl w-full max-w-2xl overflow-hidden cursor-default transition-all duration-150 scale-95 opacity-0`}
         id="search-container"
       >
         <div class="p-2">
@@ -172,7 +172,7 @@ const NAME = "Chao-Ning Hu";
     setTimeout(() => {
       const input = modal?.querySelector('input[type="text"]');
       (input as HTMLInputElement)?.focus();
-    }, 100);
+    }, 50);
   }
 
   function closeSearch() {
@@ -185,7 +185,7 @@ const NAME = "Chao-Ning Hu";
     setTimeout(() => {
       modal?.classList.add("hidden");
       modal?.classList.remove("flex");
-    }, 300);
+    }, 150);
   }
 
   searchBtn?.addEventListener("click", (e) => {
