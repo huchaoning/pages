@@ -15,9 +15,10 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
+const pageLang = post.data.lang || "en";
 ---
 
-<PostLayout frontmatter={post.data}>
+<PostLayout frontmatter={post.data} lang={`${pageLang}`}>
   <Content />
 
   <div class="mt-32">
@@ -33,7 +34,7 @@ const { Content } = await render(post);
         <a
           href="https://github.com/huchaoning/pages/discussions"
           target="_blank"
-          class="underline ml-1"
+          class="underline"
         >
           view on GitHub Discussions
         </a>

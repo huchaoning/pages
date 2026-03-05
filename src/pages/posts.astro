@@ -53,7 +53,7 @@ const years = Object.keys(groupedPosts).sort((a, b) => b - a);
 
                     <div class="flex items-center justify-between">
                       <time class="text-[10px] font-bold text-ter uppercase tracking-wides">
-                        {post.data.released.toLocaleDateString("en-US", {
+                        {post.data.released.toLocaleDateString("en", {
                           month: "short",
                           day: "numeric",
                         })}
