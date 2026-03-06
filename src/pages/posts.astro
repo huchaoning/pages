@@ -56,7 +56,7 @@ const groupKeys = Object.keys(groupedPosts).sort((a, b) => {
                   <article class="p-6 rounded-4xl transition-all duration-300 hover:-translate-y-1 glass_white">
                     <h3 class="text-xl font-bold mb-2 text-main">
                       {post.data.title}
-                      {post.data.title_zh && "(in Chinese)"}
+                      {/* {post.data.title_zh && "(in Chinese)"} */}
                     </h3>
 
                     {post.data.description && (
@@ -66,7 +66,7 @@ const groupKeys = Object.keys(groupedPosts).sort((a, b) => {
                     )}
 
                     <div class="flex items-center justify-between">
-                      <time class="text-[10px] font-bold text-ter uppercase tracking-wides">
+                      <time class="text-[10px] font-black text-ter uppercase">
                         {post.data.date.toLocaleDateString("en", {
                           month: "short",
                           day: "numeric",

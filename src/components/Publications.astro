@@ -1,0 +1,62 @@
+---
+const orcidId = "0009-0009-9008-2508";
+---
+
+<div class="orcid-wrapper">
+  <div id="orcid-container" class="space-y-4">
+    <p class="text-ter italic">Syncing publications&hellip;</p>
+  </div>
+</div>
+
+<script is:inline define:vars={{ orcidId }}>
+  (async () => {
+    const container = document.getElementById("orcid-container");
+    try {
+      const res = await fetch(`https://pub.orcid.org/v3.0/${orcidId}/works`, {
+        headers: { Accept: "application/json" },
+      });
+      const data = await res.json();
+
+      if (!data.group?.length) {
+        container.innerHTML =
+          '<p class="text-ter italic">No public works found.</p>';
+        return;
+      }
+
+      container.innerHTML = data.group
+        .map((item, index) => {
+          const w = item["work-summary"][0];
+          const title = w.title?.title?.value || "Untitled";
+          const year = w["publication-date"]?.year?.value || "n.d.";
+          const journal = w["journal-title"]?.value || "";
+          const doiId = w["external-ids"]?.["external-id"]?.find(
+            (i) => i["external-id-type"] === "doi",
+          );
+          const url = doiId
+            ? `https://doi.org/${doiId["external-id-value"]}`
+            : null;
+
+          const bgColor = index % 2 === 0 ? "bg-white" : "bg-quat";
+
+          return `
+          <a ${url ? `href="${url}" target="_blank"` : ""} class="group block no-underline">
+            <div class="pl-8 pr-8 p-4 ${bgColor}/20 w-full border-1 border-quat/20">
+              <div class="flex flex-col">
+                <div class="text-base text-main group-hover:text-blue-500 transition-colors duration-150 mb-4 leading-relaxed">
+                  ${title}
+                </div>
+                <div class="text-xs text-sec flex gap-4">
+                  <span>${year}</span>
+                  ${journal ? `<span>|</span><span class="italic">${journal}</span>` : ""}
+                </div>
+              </div>
+            </div>
+          </a>
+        `;
+        })
+        .join("");
+    } catch (e) {
+      container.innerHTML = '<p class="text-ter italic">Sync failed.</p>';
+    }
+  })();
+</script>
