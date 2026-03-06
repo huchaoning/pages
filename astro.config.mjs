@@ -25,7 +25,7 @@ export default defineConfig({
         ]
     },
 
-    integrations: [icon(), mdx(), pagefind()],
+    integrations: [icon(), mdx(), pagefind({ forceLanguage: "en" })],
     vite: {
         plugins: [tailwindcss()]
     }
