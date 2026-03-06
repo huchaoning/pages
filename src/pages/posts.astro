@@ -7,17 +7,15 @@ import { getCollection } from "astro:content";
 
 const allPosts = await getCollection("posts");
 
-// 1. 核心排序：日期降序，日期相同时标题升序
 const posts = allPosts.sort((a, b) => {
   const dateA = a.data.date.valueOf();
   const dateB = b.data.date.valueOf();
   if (dateA !== dateB) {
     return dateB - dateA;
   }
-  return a.data.title.localeCompare(b.data.title, 'zh-Hans-CN');
+  return a.data.title.localeCompare(b.data.title);
 });
 
-// 2. 按“年份 月份”分组
 const groupedPosts = posts.reduce((acc, post) => {
   const monthName = post.data.date.toLocaleString('en', { month: 'long' }).toUpperCase();
   const year = post.data.date.getFullYear();
@@ -76,7 +74,7 @@ const groupKeys = Object.keys(groupedPosts).sort((a, b) => {
                       </time>
                       <Icon
                         name="ri:arrow-right-s-line"
-                        class="w-4.5 h-4.5 text-sec opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1"
+                        class="w-4.5 h-4.5 text-main opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1"
                       />
                     </div>
                   </article>
